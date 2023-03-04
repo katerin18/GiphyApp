@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GifSearch</string>
+
+    <string name="textButton">Find a Gifs!</string>
+    <string name="textLabel">Input something to get a Gifs!</string>
+    <string name="imageTitle">Image</string>
+    <string name="imageId">_</string>
+    <string name="titleId">id:</string>
+</resources>
