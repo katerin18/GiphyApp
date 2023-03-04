@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.setHasFixedSize(true)
             recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-            //setting up onItem...
+            //setting up setOnItemClickListener
             adapter.setOnItemClickListener(object : GifsAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     val intent = Intent(this@MainActivity, Show1Gif::class.java)
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     val imgId = arrGifs[position].id_
                     val imgTitle = arrGifs[position].title
 
-                    intent.putExtra("data", "$imgUrl $imgId $imgTitle")
+                    intent.putExtra("data", "$imgUrl $imgId $imgTitle") // transfer data to diff activity
                     startActivity(intent)
                 }
             })
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             val retrofitService = retrofit.create(GetData::class.java)
-            retrofitService.getGifs(API_KEY, textSearch_).enqueue(object : Callback<DataResult?> {
+            retrofitService.getGifs(API_KEY, textSearch_, 25).enqueue(object : Callback<DataResult?> {
                 override fun onResponse(call: Call<DataResult?>, response: Response<DataResult?>) {
                     if (response.body() == null) {
                         Log.d("vvv", "onResponse != OK")
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<DataResult?>, t: Throwable) {
-                    Log.d("vvv", "nFailure was called!")
+                    Log.d("vvv", "onFailure was called!")
                 }
             })
         }

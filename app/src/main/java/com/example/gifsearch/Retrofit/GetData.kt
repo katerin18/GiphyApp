@@ -9,7 +9,8 @@ interface GetData {
     @GET("gifs/search")
     fun getGifs(
         @Query("api_key") api_key: String,
-        @Query("q") name: String?
+        @Query("q") name: String?, // query
+        @Query("limit") limit: Int // showing gifs limit
     ): retrofit2.Call<DataResult>
 
 }
